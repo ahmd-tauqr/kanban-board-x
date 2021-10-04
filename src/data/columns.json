@@ -1,0 +1,22 @@
+[
+  {
+    "title": "Open",
+    "cardIds": []
+  },
+  {
+    "title": "In Discussion",
+    "cardIds": []
+  },
+  {
+    "title": "In Progress",
+    "cardIds": []
+  },
+  {
+    "title": "To be tested",
+    "cardIds": []
+  },
+  {
+    "title": "Done",
+    "cardIds": []
+  }
+]

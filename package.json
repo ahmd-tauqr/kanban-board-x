@@ -1,0 +1,27 @@
+{
+  "homepage": "http://ahmd-tauqr.github.io/kanban-board-x",
+  "name": "kanban-board-x",
+  "description": "",
+  "version": "0.0.1",
+  "dependencies": {
+    "classnames": "2.2.5",
+    "focus-trap-react": "^5.0.1",
+    "lodash": "^4.17.21",
+    "react": "16.0.0",
+    "react-dnd": "2.5.4",
+    "react-dnd-html5-backend": "2.5.4",
+    "react-dom": "16.0.0"
+  },
+  "devDependencies": {
+    "gh-pages": "^3.2.3",
+    "react-scripts": "1.0.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
+  }
+}
