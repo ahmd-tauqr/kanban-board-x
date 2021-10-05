@@ -5,3 +5,7 @@
 - git clone https://github.com/ahmd-tauqr/kanban-board-x.git
 - npm install
 - npm start
+
+## Check live
+
+[Demo](https://ahmd-tauqr.github.io/kanban-board-x/)
