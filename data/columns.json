@@ -1,0 +1,27 @@
+[
+  {
+    "id": "97015df9-ca14-4ed8-a782-cfdb870e5b0b",
+    "title": "Open",
+    "taskIds": ["18240846-4e44-4d81-ba39-a42fafd91763"]
+  },
+  {
+    "id": "a9dc786f-6682-47b6-bc77-e3ace7e21e8c",
+    "title": "In Discussion",
+    "taskIds": ["300832f8-ee57-4548-a0f4-6747ff5b41d0"]
+  },
+  {
+    "id": "66519456-20ea-4415-be46-830db3baceb6",
+    "title": "In Progress",
+    "taskIds": ["8579a435-13d7-42d9-8ce2-cd2256621740"]
+  },
+  {
+    "id": "d68c9a13-4870-42e6-8c70-cfbdaffe2590",
+    "title": "To be tested",
+    "taskIds": ["4254a6a6-8b43-40a4-90d9-1b670767215b"]
+  },
+  {
+    "id": "b0f888d8-d942-414f-9fba-c7cd058c8d99",
+    "title": "Done",
+    "taskIds": []
+  }
+]
