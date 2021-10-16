@@ -15,12 +15,14 @@ class App extends Component {
   // when application launches.. get values for tasks and columns from api
   componentDidMount() {
     // read tasks from local json file
+    // just replace the url string into your api endpoint
     axios.get(`./data/tasks.json`).then((res) => {
       const tasks = res.data;
       console.log('tasks: ', tasks);
       this.setState({ tasks });
     });
     // read columns from local json file
+    // just replace the url string into your api endpoints
     axios.get(`./data/columns.json`).then((res) => {
       const columns = res.data;
       console.log('columns: ', columns);
