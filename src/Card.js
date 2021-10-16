@@ -36,7 +36,7 @@ export const DraggableCard = _.flowRight([
         const { columnId, columnIndex } = props;
         const draggingItem = monitor.getItem();
         if (draggingItem.id !== props.id) {
-          props.moveCard(draggingItem.id, columnId, columnIndex);
+          props.moveTask(draggingItem.id, columnId, columnIndex);
         }
       },
     },

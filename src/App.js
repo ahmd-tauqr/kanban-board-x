@@ -3,66 +3,47 @@ import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import _ from 'lodash';
 import { Board } from './Board';
-
-// mock data from json
-// import * as tasks from './data/tasks.json';
-// import * as columns from './data/columns.json';
-
-// const initialCards = JSON.parse(tasks).map((task, index) => ({
-//   id: index + 1,
-//   title: task.title,
-//   description: task.description,
-//   name: task.name,
-//   email: task.email,
-//   priority: task.priority,
-//   iconUrl: task.iconUrl,
-// }));
-
-// const initialColumns = JSON.parse(columns).map((column, index) => ({
-//   id: index + 1,
-//   name: column.name,
-// }));
-
-let _columnId = 0;
-let _cardId = 0;
-
-const initialCards = Array.from({ length: 9 }).map(() => ({
-  id: ++_cardId,
-  title: 'Design kanban',
-  description: 'description',
-  name: 'Tauqeer Ahmad',
-  email: 'tauqeer@yopmail.com',
-  priority: 'medium',
-  iconUrl: 'https://picsum.photos/20/20',
-}));
-
-const initialColumns = ['TODO', 'Doing', 'Done'].map((title, i) => ({
-  id: _columnId++,
-  title,
-  cardIds: initialCards.slice(i * 3, i * 3 + 3).map((card) => card.id),
-}));
-
+import axios from 'axios';
+// get unique ids
+import { v4 as uuid } from 'uuid';
 class App extends Component {
   state = {
-    cards: initialCards,
-    columns: initialColumns,
+    tasks: [],
+    columns: [],
   };
+
+  // when application launches.. get values for tasks and columns from api
+  componentDidMount() {
+    // read tasks from local json file
+    axios.get(`./data/tasks.json`).then((res) => {
+      const tasks = res.data;
+      console.log('tasks: ', tasks);
+      this.setState({ tasks });
+    });
+    // read columns from local json file
+    axios.get(`./data/columns.json`).then((res) => {
+      const columns = res.data;
+      console.log('columns: ', columns);
+      this.setState({ columns });
+    });
+  }
 
   addColumn = (_title) => {
     const title = _title.trim();
     if (!title) return;
 
     const newColumn = {
-      id: ++_columnId,
+      id: uuid(),
       title,
-      cardIds: [],
+      taskIds: [],
     };
     this.setState((state) => ({
       columns: [...state.columns, newColumn],
     }));
   };
 
-  addCard = (
+  // add new Card function
+  addTask = (
     columnId,
     _title,
     _description,
@@ -86,30 +67,40 @@ class App extends Component {
     const priority = _priority.trim();
     if (!priority) return;
 
-    const newCard = { id: ++_cardId, title };
+    const iconUrl = _iconUrl.trim();
+
+    const newCard = {
+      id: uuid(),
+      title,
+      description,
+      personName,
+      personEmail,
+      priority,
+      iconUrl,
+    };
     this.setState((state) => ({
-      cards: [...state.cards, newCard],
+      tasks: [...state.tasks, newCard],
       columns: state.columns.map((column) =>
         column.id === columnId
-          ? { ...column, cardIds: [...column.cardIds, newCard.id] }
+          ? { ...column, taskIds: [...column.taskIds, newCard.id] }
           : column
       ),
     }));
   };
-
-  moveCard = (cardId, destColumnId, index) => {
+  // move particular Card from one column to another
+  moveTask = (taskId, destColumnId, index) => {
     this.setState((state) => ({
       columns: state.columns.map((column) => ({
         ...column,
-        cardIds: _.flowRight(
-          // 2) If this is the destination column, insert the cardId.
+        taskIds: _.flowRight(
+          // 2) If this is the destination column, insert the taskId.
           (ids) =>
             column.id === destColumnId
-              ? [...ids.slice(0, index), cardId, ...ids.slice(index)]
+              ? [...ids.slice(0, index), taskId, ...ids.slice(index)]
               : ids,
-          // 1) Remove the cardId for all columns
-          (ids) => ids.filter((id) => id !== cardId)
-        )(column.cardIds),
+          // 1) Remove the taskId for all columns
+          (ids) => ids.filter((id) => id !== taskId)
+        )(column.taskIds),
       })),
     }));
   };
@@ -117,10 +108,10 @@ class App extends Component {
   render() {
     return (
       <Board
-        cards={this.state.cards}
+        tasks={this.state.tasks}
         columns={this.state.columns}
-        moveCard={this.moveCard}
-        addCard={this.addCard}
+        moveTask={this.moveTask}
+        addTask={this.addTask}
         addColumn={this.addColumn}
       />
     );

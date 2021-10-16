@@ -4,13 +4,16 @@
   "description": "",
   "version": "0.0.1",
   "dependencies": {
+    "axios": "^0.23.0",
     "classnames": "2.2.5",
     "focus-trap-react": "^5.0.1",
     "lodash": "^4.17.21",
     "react": "16.0.0",
+    "react-bulma-components": "^4.0.7",
     "react-dnd": "2.5.4",
     "react-dnd-html5-backend": "2.5.4",
-    "react-dom": "16.0.0"
+    "react-dom": "16.0.0",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "gh-pages": "^3.2.3",

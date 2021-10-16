@@ -3,36 +3,37 @@ import { Column } from './Column';
 import { DraggableCard } from './Card';
 import { TextForm } from './TextForm';
 
-export function Board({ cards, columns, moveCard, addCard, addColumn }) {
+export function Board({ tasks, columns, moveTask, addTask, addColumn }) {
+  console.log('inside board: ', { tasks, columns });
   return (
     <div className='Board'>
       {columns.map((column) => (
         <Column
           key={column.id}
           title={column.title}
-          addCard={addCard.bind(null, column.id)}
+          addTask={addTask.bind(null, column.id)}
         >
-          {column.cardIds
-            .map((cardId) => cards.find((card) => card.id === cardId))
-            .map((card, index) => (
+          {column.taskIds
+            .map((taskId) => tasks.find((task) => task.id === taskId))
+            .map((task, index) => (
               <DraggableCard
-                key={card.id}
-                id={card.id}
+                key={task.id}
+                id={task.id}
                 columnId={column.id}
                 columnIndex={index}
-                title={card.title}
-                description={card.description}
-                name={card.name}
-                email={card.email}
-                priority={card.priority}
-                iconUrl={card.iconUrl}
-                moveCard={moveCard}
+                title={task.title}
+                description={task.description}
+                name={task.name}
+                email={task.email}
+                priority={task.priority}
+                iconUrl={task.iconUrl}
+                moveTask={moveTask}
               />
             ))}
-          {column.cardIds.length === 0 && (
+          {column.taskIds.length === 0 && (
             <DraggableCard
               isSpacer
-              moveCard={(cardId) => moveCard(cardId, column.id, 0)}
+              moveTask={(taskId) => moveTask(taskId, column.id, 0)}
             />
           )}
         </Column>

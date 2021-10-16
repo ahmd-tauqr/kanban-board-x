@@ -1,11 +1,13 @@
 import React from 'react';
 import Container from './Container';
+import { v4 as uuid } from 'uuid';
 
 export const Column = (props) => {
   const onSubmit = (event) => {
     const form = event.target;
     event.preventDefault();
     const formValues = {
+      id: uuid(),
       title: event.target.title.value,
       description: event.target.description.value,
       name: event.target.name.value,
